@@ -31,7 +31,7 @@ Sub StockAnalysis()
                 ws.Cells(cur_row, 8).Value = ws.Cells(i, 1).Value
                 Vclose = ws.Cells(i, 6).Value
                 Vopen = ws.Cells(cur_open, 3).Value
-                change = Vopen - Vclose
+                change = Vclose - Vopen
                 ws.Cells(cur_row, 9).Value = change
                 If change >= 0 Then
                     ws.Cells(cur_row, 9).Interior.ColorIndex = 10
