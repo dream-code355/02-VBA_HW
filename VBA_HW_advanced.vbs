@@ -52,28 +52,28 @@ Sub StockAnalysis()
         Next i
 
         'add another for loop to get max values
-        Dim max_change As Double
-        Dim max_change_ticker As String
+        Dim min_pct_change As Variant
+        Dim min_pct_change_ticker As String
         Dim max_pct_change As Variant
         Dim max_pct_change_ticker As String
         Dim max_total As Double
         Dim max_total_ticker As String
 
-        max_change = ws.Cells(2, 10).Value
+        min_pct_change = ws.Cells(2, 11).Value
         max_pct_change = ws.Cells(2, 11).Value
         max_total = ws.Cells(2, 12).Value
         nrows = ws.Cells(ws.Cells.Rows.Count, 9).End(xlUp).Row
 
-        ws.Cells(2, 14).Value = "Max Change"
+        ws.Cells(2, 14).Value = "Min Percent Change"
         ws.Cells(3, 14).Value = "Max Percent Change"
         ws.Cells(4, 14).Value = "Max Total Volume"
         ws.Cells(1, 15).Value = "Ticker"
         ws.Cells(1, 16).Value = "Value"
 
         For i = 2 To nrows:
-            If ws.Cells(i, 10).Value > max_change Then
-                max_change = ws.Cells(i, 10).Value
-                max_change_ticker = ws.Cells(i, 9).Value
+            If ws.Cells(i, 11).Value < min_pct_change And ws.Cells(i,11) <> "Error" Then
+                min_pct_change = ws.Cells(i, 11).Value
+                min_pct_change_ticker = ws.Cells(i, 9).Value
             End If
             If ws.Cells(i, 11).Value > max_pct_change And ws.Cells(i, 11) <> "Error" Then
                 max_pct_change = ws.Cells(i, 11).Value
@@ -85,10 +85,10 @@ Sub StockAnalysis()
             End If
         Next i
 
-        ws.Cells(2, 15).Value = max_change_ticker
+        ws.Cells(2, 15).Value = min_pct_change_ticker
         ws.Cells(3, 15).Value = max_pct_change_ticker
         ws.Cells(4, 15).Value = max_total_ticker
-        ws.Cells(2, 16).Value = max_change
+        ws.Cells(2, 16).Value = min_pct_change
         ws.Cells(3, 16).Value = max_pct_change
         ws.Cells(4, 16).Value = max_total
     Next ws
